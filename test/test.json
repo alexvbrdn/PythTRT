@@ -1,0 +1,61 @@
+{
+    "balancer": {
+        "links": [
+            {
+                "interface": "wlp5s0",
+                "matchers": [
+                    {
+                        "domains_re": [
+                            "^intranet$"
+                        ],
+                        "policy": "prioritize",
+                        "ports": [
+                            443
+                        ]
+                    },
+                    {
+                        "domains_re": [
+                            "^server-test$"
+                        ],
+                        "policy": "prioritize",
+                        "ports": [
+                            8080
+                        ]
+                    }
+                ],
+                "protocol": "direct",
+                "timeout": 10,
+                "weight": 1
+            },
+            {
+                "interface": "enp3s0",
+                "matchers": [
+                    {
+                        "domains_re": [
+                            ".com$"
+                        ],
+                        "policy": "forbid"
+                    }
+                ],
+                "protocol": "direct",
+                "timeout": 10,
+                "weight": 2
+            }
+        ],
+        "matchers": [
+            {
+                "policy": "allow",
+                "ports": [
+                    443,
+                    80,
+                    8080
+                ]
+            }
+        ],
+        "strategy": "least_connections"
+    },
+    "domain": "0.0.0.0",
+    "max_threads": 200,
+    "port": 1080,
+    "timeout": 5
+}

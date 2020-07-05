@@ -1,0 +1,39 @@
+{
+  "balancer": {
+    "links": [
+      {
+        "protocol": "socks5",
+        "domain": "127.0.0.1",
+        "port": 1081,
+        "matchers": [
+          {
+            "domains_re": [
+              "\\.intranet.com$"
+            ],
+            "policy": "forbid"
+          }
+        ]
+      },
+      {
+        "matchers": [
+          {
+            "domains_re": [
+              "\\.intranet.com$"
+            ],
+            "policy": "allow"
+          }
+        ]
+      }
+    ],
+    "matchers": [
+      {
+        "policy": "allow",
+        "ports": [
+          80,
+          443,
+          8080
+        ]
+      }
+    ]
+  }
+}
